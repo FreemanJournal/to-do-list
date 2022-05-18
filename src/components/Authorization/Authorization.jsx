@@ -24,7 +24,7 @@ export default function Authorization() {
         <div className="flex max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 my-32">
 
             <div className="w-full px-6 py-8 md:px-8  mx-auto">
-                <h2 className="text-2xl font-semibold text-center text-gray-700 dark:text-white">Smart To-Do App</h2>
+                <h2 className="text-2xl font-semibold text-center text-gray-700 dark:text-white">Sign In</h2>
                 <button onClick={() => signInWithGoogle()} className="flex items-center w-full justify-center mt-4 text-gray-600 transition-colors duration-200 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <div className="px-4 py-2">
                         <svg className="w-6 h-6" viewBox="0 0 40 40">
