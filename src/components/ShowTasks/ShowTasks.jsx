@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { BsTrashFill } from 'react-icons/bs';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../utilities/firebase.init';
 import Loader from '../../utilities/Loader';
+import { GlobalContext } from '../context/GlobalContext';
 import TaskRow from './TaskRow';
 
 export default function ShowTasks() {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-  const [allTask, setAllTask] = useState();
+  const {allTask,setAllTask} = useContext(GlobalContext)
 
-  const { isLoading, data } = useQuery('tasks', () => fetch(`/data/data.json`).then(res => res.json()))
 
   const deleteHandler = (id) =>{
     setAllTask(prev => prev.filter(item=>item.id !== id))   
   }
-  useEffect(()=>setAllTask(data),[data])
 
-  if (loading || isLoading) {
+  if (loading) {
     return <Loader />
   }
   const bookingTable = ["Task Name", "Description", "Status", ""]
@@ -27,6 +26,7 @@ export default function ShowTasks() {
 
   return (
     <div className="overflow-x-auto px-20 mb-32">
+      <h2 className='text-3xl font-bold text-center my-10 uppercase'>My Daily Tasks</h2>
 
       {
           allTask.length === 0 ? <h1 className="my-10 text-center text-3xl w-full">Create a new task</h1>:
@@ -53,7 +53,7 @@ export default function ShowTasks() {
       
        <tbody className="divide-y divide-gray-100">
           {
-            allTask?.map((user, i) => <TaskRow key={i} user={user} deleteHandler={deleteHandler}/>)
+            allTask?.slice().reverse().map((user, i) => <TaskRow key={i} user={user} deleteHandler={deleteHandler}/>)
           }
 
 

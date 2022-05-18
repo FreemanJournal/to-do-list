@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
+import { GlobalContext } from '../context/GlobalContext';
+import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 export default function AddTask() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    const { allTask, setAllTask } = useContext(GlobalContext)
 
     const onSubmitHandler = (data) => {
-        console.log('data',data);
+        const newTask = { ...data, id: uuidv4() }
+        setAllTask(prev => [...prev, newTask])
+        toast.success("New Task created!")
+        reset()
+        
+
     }
     return (
 
@@ -16,10 +25,10 @@ export default function AddTask() {
                         <form onSubmit={handleSubmit(onSubmitHandler)} className="space-y-4">
                             <div>
                                 <label className="sr-only" htmlFor="name">Task Name</label>
-                                <input className="w-full p-3 text-sm border-gray-200 rounded-lg  focus:ring-0 focus:outline-none focus:border-slate-800" placeholder="Task Name" type="text" id="name" {...register("taskName")} />
+                                <input className="w-full p-3 text-sm border-gray-200 rounded-lg  focus:ring-0 focus:outline-none focus:border-slate-800" placeholder="Task Name" type="text" id="name" required {...register("taskName")} />
                             </div>
 
-                           
+
 
                             <div>
                                 <label className="sr-only" htmlFor="description">Description</label>
@@ -28,7 +37,8 @@ export default function AddTask() {
                                     placeholder="Description"
                                     rows="3"
                                     id="description"
-                                    {...register("description")} 
+                                    required
+                                    {...register("description")}
                                 ></textarea>
                             </div>
 
