@@ -1,0 +1,17 @@
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Home from '../pages/Home'
+import SignInPage from '../pages/SignInPage'
+
+export default function Routing() {
+
+  return (
+    <>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='signIn' element={<SignInPage />} />
+        <Route path='registration' element={<Home />} />
+      </Routes>
+    </>
+  )
+}
