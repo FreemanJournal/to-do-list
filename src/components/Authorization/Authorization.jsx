@@ -1,24 +1,21 @@
 import React, { useEffect } from 'react';
-import { useAuthState, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../utilities/firebase.init';
 import Loader from '../../utilities/Loader';
 export default function Authorization() {
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, googleUser, googleLoading] = useSignInWithGoogle(auth);
     const navigate = useNavigate();
     const location = useLocation();
-    const [user, loading, error] = useAuthState(auth);
-
-
     let from = location.state?.from?.pathname || "/";
 
     useEffect(() => {
-        if (user) {
+        if (googleUser) {
             navigate(from, { replace: true })
         }
-    }, [user, from, navigate])
+    }, [googleUser, from, navigate])
 
-    if (loading) {
+    if (googleLoading) {
         return <Loader />
     }
 

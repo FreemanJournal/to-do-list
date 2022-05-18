@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../utilities/firebase.init';
 import Loader from '../../utilities/Loader';
@@ -9,7 +8,6 @@ import TaskRow from './TaskRow';
 
 export default function ShowTasks() {
   const [user, loading, error] = useAuthState(auth);
-  const navigate = useNavigate();
   const {allTask,setAllTask} = useContext(GlobalContext)
 
 

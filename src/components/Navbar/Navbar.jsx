@@ -1,19 +1,17 @@
 import { signOut } from 'firebase/auth';
-import React, { useState } from 'react'
+import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { NavLink } from 'react-router-dom'
-import auth from '../../utilities/firebase.init';
 import { FcExport } from "react-icons/fc";
+import { NavLink } from 'react-router-dom';
+import auth from '../../utilities/firebase.init';
 export default function Navbar() {
-    const [user, loading, error] = useAuthState(auth);
-    const [display, setDisplay] = useState(true);
+    const [user] = useAuthState(auth);
     const menuItems = [
-        { item: 'Home', href: "/", status: display },
+        { item: 'Home', href: "/", status: !!user },
         { item: 'SignIn', href: "/signIn", status: !user },
     ]
 
     const signOutHandler = () => {
-        localStorage.removeItem('accessToken')
         signOut(auth);
     };
     return (

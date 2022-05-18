@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 export default function AddTask() {
     const { register, handleSubmit,reset, formState: { errors } } = useForm();
-    const { allTask, setAllTask } = useContext(GlobalContext)
+    const { setAllTask } = useContext(GlobalContext)
 
     const onSubmitHandler = (data) => {
         const newTask = { ...data, id: uuidv4() }
