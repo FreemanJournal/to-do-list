@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { BsTrashFill } from 'react-icons/bs';
-import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../utilities/firebase.init';
 import Loader from '../../utilities/Loader';
 import { GlobalContext } from '../context/GlobalContext';
@@ -15,7 +14,8 @@ export default function ShowTasks() {
 
 
   const deleteHandler = (id) =>{
-    setAllTask(prev => prev.filter(item=>item.id !== id))   
+    setAllTask(prev => prev.filter(item=>item.id !== id))
+    toast.success("Task Successfully Deleted.")
   }
 
   if (loading) {
