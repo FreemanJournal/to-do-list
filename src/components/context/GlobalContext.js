@@ -8,7 +8,6 @@ export default function GlobalProvider({ children }) {
 
     const { isLoading, data } = useQuery('tasks', () => fetch(`/data/data.json`).then(res => res.json()))
     useEffect(()=>{
-       
         setAllTask(data)
     },[data])
 

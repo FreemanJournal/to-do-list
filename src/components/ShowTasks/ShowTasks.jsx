@@ -51,7 +51,7 @@ export default function ShowTasks() {
       
        <tbody className="divide-y divide-gray-100">
           {
-            allTask?.slice().reverse().map((user, i) => <TaskRow key={i} user={user} deleteHandler={deleteHandler}/>)
+            allTask?.slice().reverse().map((user) => <TaskRow key={user.id} user={user} deleteHandler={deleteHandler}/>)
           }
 
 
